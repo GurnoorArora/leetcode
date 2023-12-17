@@ -1,0 +1,37 @@
+//combination sum problemon leetcode-https://leetcode.com/problems/combination-sum/
+class Solution {
+public:
+void solve(vector<int>&candidates,vector<int>&ds,vector<vector<int>>&ans,int index,int target)
+    {
+        //base case
+        if(index==candidates.size())
+        {
+            if(target==0)
+            {
+                ans.push_back(ds);
+            }
+            return;
+        }
+        else
+        {
+            ds.push_back(candidates[index]);
+            //if we are gonna pick it up
+            if(candidates[index]<=target)
+            {
+            solve(candidates,ds,ans,index,target-candidates[index]);
+            //if we dont want to pick it up
+            }
+            ds.pop_back();
+            solve(candidates,ds,ans,index+1,target);
+
+        }
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> ans;
+        vector<int> ds;
+        solve(candidates,ds,ans,0,target);
+        return ans;
+
+        
+    }
+};
