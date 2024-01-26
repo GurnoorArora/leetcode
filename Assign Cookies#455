@@ -1,0 +1,36 @@
+//here i have solved the assign cookies problem(problem number-455)
+
+/* I have used The Two Pointer approcah to solve this problem
+     Explanation- So Initially we sort both the vectors
+                  then we initialize two pointers counter1 and counter2 with 0
+                  we run a loop which will terminate whichever vector(g or s) is traversed first
+                  initially both the counters check the 0th index
+                  if the greed of the element in g is satisfied by the element in s both the counters are incremented to next index
+                  if not then the size of coookie(s pointer) is incremented and checked if the present value of the cookie satisfies the greed if not then again s pointer++ if yes then s pointer++ and g pointer++
+                  at the end of the loop the counter1 that is the number of count of the greed vector is returned as the value for nuymber of children satisfied
+*/
+
+//code-
+class Solution {
+public:
+    int findContentChildren(vector<int>& g, vector<int>& s) {
+        sort(g.begin(),g.end());
+        sort(s.begin(),s.end());
+        //using the two pointer approach
+        int counter1=0;
+        int counter2=0;
+        while(counter2<s.size() && counter1<g.size())
+        {
+            if(s[counter2]>=g[counter1])
+            {
+                counter1++;
+                counter2++;
+            }
+            else
+            {
+                counter2++;
+            }
+        }
+        return counter1;
+    }       
+};
